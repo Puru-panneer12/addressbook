@@ -11,6 +11,7 @@ pipeline {
             steps {
                 echo 'Compiling the code'
                 echo "Compiling in ${params.Env}"
+                sh 'mvn compile'
             }
         }
         stage('Test') {
