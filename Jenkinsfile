@@ -37,9 +37,11 @@ pipeline {
             }
         }
         stage('Package') {
-            agent {
-        // Specify the label or name of the Jenkins agent (slave)
-        label 'linux_slave3'
+        //    agent {
+        // // Specify the label or name of the Jenkins agent (slave)
+        // label 'linux_slave3'
+
+        agent any
     }
              input {
                 message "Select the environment to deploy"
@@ -49,9 +51,13 @@ pipeline {
                 }
              }
             steps {
-                echo 'Packaging the code'
-                echo "Packaging version ${params.APPVERSION}"
-                sh 'mvn package'
+                script{
+                    sshagent ([sshagent 'deploy-server']){
+                        echo 'Packaging the code'
+                        echo "Packaging version ${params.APPVERSION}"
+                        sh 'mvn package'
+                    }
+                }
             }
         }
     }
