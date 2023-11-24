@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
     tools{
         jdk 'myjava'
         maven 'mymaven'
@@ -12,6 +12,10 @@ pipeline {
     }
     stages {
         stage('Compile') {
+            agent {
+        // Specify the label or name of the Jenkins agent (slave)
+        label 'linux_slave1'
+    }
             steps {
                 echo 'Compiling the code'
                 echo "Compiling in ${params.Env}"
@@ -19,6 +23,10 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+        // Specify the label or name of the Jenkins agent (slave)
+        label 'linux_slave2'
+    }
             when {
                 expression{
                     params.executeTests == true
@@ -30,6 +38,10 @@ pipeline {
             }
         }
         stage('Package') {
+            agent {
+        // Specify the label or name of the Jenkins agent (slave)
+        label 'linux_slave3'
+    }
              input {
                 message "Select the environment to deploy"
                 ok "Deployed"
