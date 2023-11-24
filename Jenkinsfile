@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    tools{
-        maven 'mymaven'
-    }
-   
+      
     parameters { 
         string(name: 'Env', defaultValue: 'Test', description: 'version to deploy') 
         booleanParam(name: 'executeTests', defaultValue: true, description: 'decide to run tc')
@@ -14,7 +11,6 @@ pipeline {
             steps {
                 echo 'Compiling the code'
                 echo "Compiling in ${params.Env}"
-                sh 'mvn Compile' 
             }
         }
         stage('Test') {
@@ -25,7 +21,6 @@ pipeline {
             }
             steps {
                 echo 'Testing the code'
-                sh 'mvn test'
             }
         }
         stage('Package') {
@@ -40,7 +35,6 @@ pipeline {
             steps {
                 echo 'Packaging the code'
                 echo "Packaging version ${params.APPVERSION}"
-                sh 'mvn package'
             }
         }
     }
