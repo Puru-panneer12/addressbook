@@ -38,7 +38,7 @@ pipeline {
     }
              input {
                 message "Select the environment to deploy"
-                ok "Deployed"
+                ok "Deploy"
                 parameters{
                     choice( name:'NEWAPP', choices:['SIT','UAT','PROD'])
                 }
