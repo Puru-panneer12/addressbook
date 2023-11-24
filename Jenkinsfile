@@ -27,7 +27,7 @@ pipeline {
                 message "Select the version of the package"
                 ok "Version Selected"
                 parameters{
-                    choice( name:'NEWAPP', choices['1.2','2.1','3.1'])
+                    choice( name:'NEWAPP', choices:['1.2','2.1','3.1'])
                 }
              }
 
