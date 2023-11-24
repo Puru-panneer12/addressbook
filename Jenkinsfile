@@ -30,6 +30,11 @@ pipeline {
                 echo 'Testing the code'
                 sh  'mvn test'
             }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
         }
         stage('Package') {
             agent {
@@ -43,7 +48,6 @@ pipeline {
                     choice( name:'NEWAPP', choices:['SIT','UAT','PROD'])
                 }
              }
-
             steps {
                 echo 'Packaging the code'
                 echo "Packaging version ${params.APPVERSION}"
