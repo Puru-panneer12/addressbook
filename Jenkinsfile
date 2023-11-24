@@ -12,10 +12,7 @@ pipeline {
     }
     stages {
         stage('Compile') {
-            agent {
-        // Specify the label or name of the Jenkins agent (slave)
-        label 'linux_slave1'
-    }
+            agent any
             steps {
                 echo 'Compiling the code'
                 echo "Compiling in ${params.Env}"
@@ -23,10 +20,7 @@ pipeline {
             }
         }
         stage('Test') {
-            agent {
-        // Specify the label or name of the Jenkins agent (slave)
-        label 'linux_slave2'
-    }
+            agent any
             when {
                 expression{
                     params.executeTests == true
