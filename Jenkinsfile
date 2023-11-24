@@ -37,6 +37,7 @@ pipeline {
             steps {
                 echo 'Packaging the code'
                 echo "Packaging version ${params.APPVERSION}"
+                sh 'mvn package'
             }
         }
     }
